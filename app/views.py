@@ -24,6 +24,8 @@ def deletesupplier(request,iidee):
          Supplier.objects.filter(id = iidee).delete()
          return redirect(request.META['HTTP_REFERER'])       
 ...
+#PRODUCTS HANDLING
+
 
 def productlistview(request):
         productlist = Product.objects.all()
@@ -44,3 +46,15 @@ def addproduct(request):
 def deleteproduct(request,iidee):
          Product.objects.filter(id = iidee).delete()
          return redirect(request.META['HTTP_REFERER']) 
+
+def edit_product_get(request,iidee):
+        product = Product.objects.filter(id = iidee)
+        context = {'product': product}
+        return render (request, "edit_product.html",context)
+
+def edit_product_post(request,iidee):
+        item = Product.objects.get(id = iidee)
+        item.unitprice = request.POST['unitprice']
+        item.unitsinstock = request.POST['unitsinstock']
+        item.save()
+        return redirect(productlistview)                     
