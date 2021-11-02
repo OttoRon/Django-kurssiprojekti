@@ -20,14 +20,9 @@ def addsupplier(request):
         Supplier(companyname = a, contactname = b, address = c, phone = d, email = e, country = f).save()
         return redirect(request.META['HTTP_REFERER'])
 
-# def productlistview(request):
-#     productslist = Product.objects.all()
-#     context = {'product': productslist}
-#     return render (request, "products.html", context)
-
-# Product listaus ja lisäys metoditkin meni uusiksi relaatioiden takia, mutta on se sen arvoista. Tässä
-# siis uusi versio noihin 2 metodiin:
-
+def deletesupplier(request,iidee):
+         Supplier.objects.filter(id = iidee).delete()
+         return redirect(request.META['HTTP_REFERER'])       
 ...
 
 def productlistview(request):
@@ -46,3 +41,6 @@ def addproduct(request):
         Product(productname = a, packagesize = b, unitprice = c, unitsinstock = d, supplier = Supplier.objects.get(id = e)).save()
         return redirect(request.META['HTTP_REFERER'])
       
+def deleteproduct(request,iidee):
+         Product.objects.filter(id = iidee).delete()
+         return redirect(request.META['HTTP_REFERER']) 

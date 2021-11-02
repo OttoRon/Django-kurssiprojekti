@@ -36,7 +36,42 @@
 </div>
 
 {% endfor %}
+<script>
 
+    let y = `
+    <h2 style="color: darkorange;">Please fill in form</h2>
+    
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+            <form method="post" action="/add-product/">
+                {%csrf_token %}
+                <input class="card-text" class="card-text" type="text" placeholder="product name" name="productname">
+                <input class="card-text" type="text" placeholder="package size" name="packagesize">
+                <input class="card-text" type="text" placeholder="unitprice" name="unitprice">
+                <input class="card-text" type="text" placeholder="units in stock or 0" name="unitsinstock">  
+                <div><label for="supplier">Supplier</label></div>            
+                
+                <select id="supplier" name="supplier">
+                {% for s in suppliers %}
+                  <option value="{{s.id}}">{{s.companyname}}</option>
+                  {% endfor %}
+                </select>
+                
+                <input type="submit" value="Confirm" class="btn btn-success btn-sm" name="">
+                <input type="submit" id="hide-btn" class="btn btn-secondary btn-sm" onclick="hideaddform()" value="Cancel" name="">
+            </form>
+        </div>
+    </div>`
+
+    function showaddform() {
+        document.getElementById("add-div").innerHTML = y
+    }
+
+    function hideaddform() {
+        document.getElementById("add-div").innerHTML = ""
+    }
+
+</script>
 
 
 {% endblock %}
