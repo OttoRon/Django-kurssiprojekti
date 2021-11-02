@@ -3,15 +3,13 @@
 
 {% block content %}
 
+<button id="add-btn" class="btn btn-success btn-sm" onclick="showaddform()">Add new products</button>
+<div id="add-div"></div>
+
 
 <h1>Products</h1>
 
-<div>
-    <a class="btn btn-secondary btn-sm" href="/">Home</a>
-    <button id="add-btn" class="btn btn-succes btn-sm">Add new products</button>
-    <a class ="btn-warning btn-sm" href="suppliers.html">Manage suppliers</a>
-    <a class ="btn-success btn-sm" href="products.html">Manage products</a>
-</div>
+
 
 {% for p in products %}
 
