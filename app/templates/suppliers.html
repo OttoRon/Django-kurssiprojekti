@@ -3,8 +3,32 @@
 
 {% block content %}
 
+<div class="btn-group" role="group">
+    <a class="btn btn-secondary btn-sm" href="/">Home</a>
+    <button id="add-btn" class="btn btn-succes btn-sm">Add new supplies</button>
+    <a class ="btn-warning btn-sm" href="suppliers.html">Manage suppliers</a>
+    <a class ="btn-success btn-sm" href="products.html">Manage products</a>
+
+</div>
 
 <h1>Suppliers</h1>
+
+{% for s in suppliers %}
+
+<div class="card" style="border-width: 50rem">
+    <div class="card-body">
+        <h4 class="card-title">{{s.companyname}}</h4>
+        <p class="card-text">{{s.contactname}} | phone: {{s.phone}} | email: {{s.email}}</p>
+        <p class="card-text"> Address: {{s.address}} | County: {{s.country}}</p>
+
+        <a href="#" class="btn btn-primary">Edit</a>
+        <a href="/delete-supplier/{{s.id}}/" class="btn btn-danger">Delete</a>
+        <a href="" class="btn btn-secondary">{{s.companyname}} Products</a>
+
+    </div>
+</div>
+
+{%endfor%}
 
 
 
