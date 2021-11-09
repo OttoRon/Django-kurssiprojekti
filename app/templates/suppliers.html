@@ -15,7 +15,7 @@
         <h4 class="card-title">{{s.companyname}}</h4>
         <p class="card-text">{{s.contactname}} | phone: {{s.phone}} | email: {{s.email}}</p>
         <p class="card-text"> Address: {{s.address}} | County: {{s.country}}</p>
-        <a href="#" class="btn btn-primary">Edit</a>
+        <a href="/edit-supplier-get/{{s.id}}/" class="btn btn-primary">Edit</a>
         <a href="/delete-supplier/{{s.id}}/" class="btn btn-danger">Delete</a>
         <a href="" class="btn btn-secondary">{{s.companyname}} Products</a>
     </div>

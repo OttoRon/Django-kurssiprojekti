@@ -5,6 +5,8 @@ from .models import Supplier, Product
 def landgingview(request):
         return render(request, "landingpage.html")
 
+#SUPPLIERS HANDLING
+
 def supplierlistview(request):
         supplierlist = Supplier.objects.all()
         context = {'suppliers': supplierlist}
@@ -22,8 +24,23 @@ def addsupplier(request):
 
 def deletesupplier(request,iidee):
          Supplier.objects.filter(id = iidee).delete()
-         return redirect(request.META['HTTP_REFERER'])       
-...
+         return redirect(request.META['HTTP_REFERER'])    
+
+def edit_supplier_get(request,iidee):
+        supplier = Supplier.objects.filter(id = iidee)
+        context = {'supplier': supplier}
+        return render (request, "edit_supplier.html",context)
+
+def edit_supplier_post(request,iidee):
+        item = Supplier.objects.get(id = iidee)
+        item.address = request.POST['address']
+        item.phone = request.POST['phone']
+        item.email = request.POST['email']
+        item.save()
+        return redirect(supplierlistview)         
+         
+            
+
 #PRODUCTS HANDLING
 
 
