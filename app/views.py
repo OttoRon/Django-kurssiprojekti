@@ -1,9 +1,33 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from .models import Supplier, Product
+from django.contrib.auth import authenticate, login, logout
+
+
+#LANDGIN AFTER LOGIN
 
 def landgingview(request):
         return render(request, "landingpage.html")
+
+# LOGIN AND LOGOUT
+
+def loginview(request):
+        return render(request, "loginpage.html")
+
+def login_action(request):
+        user = request.POST['username']
+        passw = request.POST['password']
+        user = authenticate(username = user, password = passw)
+        if user:
+                login(request, user)
+                context = {'name': user}
+                return render(request, 'landingpage.html', context)
+        else:
+                return render(request, 'loginerror.html')        
+
+def logout_action(request):
+        logout(request)
+        return render(request, 'loginpage.html')
 
 #SUPPLIERS HANDLING
 
