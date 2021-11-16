@@ -5,9 +5,9 @@ from django.contrib.auth import authenticate, login, logout
 
 
 #LANDGIN AFTER LOGIN
-
+'''
 def landgingview(request):
-        return render(request, "landingpage.html")
+         return render(request, "landingpage.html")'''
 
 # LOGIN AND LOGOUT
 
