@@ -104,11 +104,13 @@ def edit_product_post(request,iidee):
 
 def products_filtered(request,iidee):
         #luodaan olio jossa kaikki Supplierit
-        supplierObj = Supplier.objects.get(id = iidee)
-        cname = supplierObj.companyname
+        # supplierObj = Supplier.objects.get(id = iidee)
+        # cname = supplierObj.companyname
         #luodaan olio jossa kaikki tuotteet
+
+
         productlist = Product.objects.all()
         #filteröidään niin, että haetaan tietyn supplierin tuotteet
-        filteredproducts = productlist.filter(companyname = cname)
+        filteredproducts = productlist.filter(supplier = iidee)
         context = {'products': filteredproducts}
         return render (request, "products.html", context)
