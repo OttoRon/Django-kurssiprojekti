@@ -61,7 +61,17 @@ def edit_supplier_post(request,iidee):
         item.phone = request.POST['phone']
         item.email = request.POST['email']
         item.save()
-        return redirect(supplierlistview)         
+        return redirect(supplierlistview)       
+
+
+def searchsuppliers(request):
+#      if not request.user.is_authenticated:
+#         return render(request, 'loginpage.html')
+#      else:
+        search = request.POST['search']
+        filtered = Supplier.objects.filter(companyname__icontains=search)
+        context = {'suppliers': filtered}
+        return render (request,"suppliers.html",context)  
          
             
 

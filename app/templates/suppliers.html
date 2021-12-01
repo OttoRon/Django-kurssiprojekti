@@ -3,10 +3,23 @@
 
 {% block content %}
 
-<button id="add-btn" class="btn btn-success btn-sm" onclick="showaddform()">Add new supplier</button>
+
 <div id="add-div"></div>
 
 <h1>Suppliers</h1>
+
+<button id="add-btn" class="btn btn-success btn-sm" onclick="showaddform()">Add new supplier</button>
+<div class="card" style="width: 20rem;">
+    <div class="card-body">
+        <form method="post" action="/search-suppliers/">
+
+            {%csrf_token %}
+            <input class="card-text" class="card-text" type="text" placeholder="search" name="search">
+
+            <input type="submit" value="Search" class="btn btn-success btn-sm" name="">
+        </form>
+    </div>
+</div>
 
 {% for s in suppliers %}
 
