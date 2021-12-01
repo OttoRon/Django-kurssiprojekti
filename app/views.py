@@ -5,9 +5,9 @@ from django.contrib.auth import authenticate, login, logout
 
 
 #LANDGIN AFTER LOGIN
-
+'''
 def landgingview(request):
-        return render(request, "landingpage.html")
+         return render(request, "landingpage.html")'''
 
 # LOGIN AND LOGOUT
 
@@ -79,20 +79,26 @@ def searchsuppliers(request):
 
 
 def productlistview(request):
-        productlist = Product.objects.all()
-        supplierlist = Supplier.objects.all()
-        context = {'products': productlist, 'suppliers': supplierlist}
-        return render (request,"products.html",context)
+        if not request.user.is_authenticated:
+                return render(request, 'loginpage.html')
+        else:        
+                productlist = Product.objects.all()
+                supplierlist = Supplier.objects.all()
+                context = {'products': productlist, 'suppliers': supplierlist}
+                return render (request,"products.html",context)
 
 
 def addproduct(request):
-        a = request.POST['productname']
-        b = request.POST['packagesize']
-        c = request.POST['unitprice']
-        d = request.POST['unitsinstock']
-        e = request.POST['supplier']
-        Product(productname = a, packagesize = b, unitprice = c, unitsinstock = d, supplier = Supplier.objects.get(id = e)).save()
-        return redirect(request.META['HTTP_REFERER'])
+        if not request.user.is_authenticated:
+                return render(request, 'loginpage.html')
+        else:        
+                a = request.POST['productname']
+                b = request.POST['packagesize']
+                c = request.POST['unitprice']
+                d = request.POST['unitsinstock']
+                e = request.POST['supplier']
+                Product(productname = a, packagesize = b, unitprice = c, unitsinstock = d, supplier = Supplier.objects.get(id = e)).save()
+                return redirect(request.META['HTTP_REFERER'])
       
 def deleteproduct(request,iidee):
          Product.objects.filter(id = iidee).delete()
